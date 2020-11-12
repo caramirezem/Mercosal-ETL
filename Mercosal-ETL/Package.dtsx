@@ -1,0 +1,625 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/3/2020 7:49:29 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NBCRAMIREZM"
+  DTS:CreatorName="SAVONA\cramirezm"
+  DTS:DTSID="{D201B844-469E-4217-B5DE-9B239EA42F39}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="17418"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{88FC8957-B932-491D-80DB-EB1E68665F6F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B7A76802-8C8B-4641-B510-E7C940384763}"
+      DTS:ObjectName="Administrador de conexiones con Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\cramirezm\Desktop\ETL\INPUT\ExistenciaProducto.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[NBCRAMIREZM\SQLEXPRESS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{355ABBEF-BAF7-4818-9E59-6FC83C8B33F2}"
+      DTS:ObjectName="NBCRAMIREZM\SQLEXPRESS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NBCRAMIREZM\SQLEXPRESS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[NBCRAMIREZM\SQLEXPRESS.Mercosal]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7C2F126A-8F7B-4A8A-8664-EB106DE99977}"
+      DTS:ObjectName="NBCRAMIREZM\SQLEXPRESS.Mercosal">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NBCRAMIREZM\SQLEXPRESS;Initial Catalog=Mercosal;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Bodegas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{5045BD41-A76C-49F2-BF99-AE97F2A3BD3C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Bodegas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Bodegas\Origen de Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Origen de Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Bodegas\Origen de Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Bodegas\Origen de Excel.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <externalMetadataColumns
+                    isUsed="True" />
+                </output>
+                <output
+                  refId="Package\Bodegas\Origen de Excel.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Bodegas\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Bodegas\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Bodegas\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Bodegas\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Productos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{E621AD4C-4CC1-4043-BFC8-2DBCA88B7C43}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Productos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Productos\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[producto]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Productos\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NBCRAMIREZM\SQLEXPRESS.Mercosal]"
+                  connectionManagerRefId="Package.ConnectionManagers[NBCRAMIREZM\SQLEXPRESS.Mercosal]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Codigo Articulo]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Codigo Articulo"
+                      externalMetadataColumnId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[codigo]"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Codigo Articulo]" />
+                    <inputColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Articulo]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Articulo"
+                      externalMetadataColumnId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[producto]"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Articulo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[codigo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="codigo" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[producto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="producto" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[id_marca_categoria]"
+                      dataType="i4"
+                      name="id_marca_categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[uxc]"
+                      dataType="i4"
+                      name="uxc" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[id_bodega]"
+                      dataType="i4"
+                      name="id_bodega" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[inventario]"
+                      dataType="r8"
+                      name="inventario" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[color]"
+                      dataType="i4"
+                      name="color" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[presentacion]"
+                      dataType="i4"
+                      name="presentacion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Productos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Productos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Productos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Productos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Productos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Productos\Origen de Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Origen de Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">Sheet$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Productos\Origen de Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Administrador de conexiones con Excel]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Bodega]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Bodega]"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Bodega]"
+                      name="Bodega"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Codigo Articulo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Codigo Articulo]"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Codigo Articulo]"
+                      name="Codigo Articulo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Articulo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Articulo]"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Articulo]"
+                      name="Articulo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Unidad Medida]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Unidad Medida]"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Unidad Medida]"
+                      name="Unidad Medida"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Existencia]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Existencia]"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].Columns[Existencia]"
+                      name="Existencia"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Bodega]"
+                      dataType="wstr"
+                      length="255"
+                      name="Bodega" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Codigo Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Codigo Articulo" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Articulo" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Unidad Medida]"
+                      dataType="wstr"
+                      length="255"
+                      name="Unidad Medida" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Existencia]"
+                      dataType="r8"
+                      name="Existencia" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Kilos]"
+                      dataType="r8"
+                      name="Kilos" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Reserva]"
+                      dataType="r8"
+                      name="Reserva" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Producto Grupo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Producto Grupo" />
+                    <externalMetadataColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel].ExternalColumns[Localizacion]"
+                      dataType="wstr"
+                      length="255"
+                      name="Localizacion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Bodega]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Bodega]"
+                      name="Bodega" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Codigo Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Codigo Articulo]"
+                      name="Codigo Articulo" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Articulo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Articulo]"
+                      name="Articulo" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Unidad Medida]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Unidad Medida]"
+                      name="Unidad Medida" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Existencia]"
+                      dataType="r8"
+                      lineageId="Package\Productos\Origen de Excel.Outputs[Salida de error de origen de Excel].Columns[Existencia]"
+                      name="Existencia" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Productos.Paths[Salida de origen de Excel]"
+              endId="Package\Productos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de origen de Excel"
+              startId="Package\Productos\Origen de Excel.Outputs[Salida de origen de Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Productos"
+          TopLeft="222.857144438491,189.352942345464" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Bodegas"
+          TopLeft="76,57" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Productos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Productos\Destino de OLE DB"
+          TopLeft="369.285720574613,169.000002370161" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Productos\Origen de Excel"
+          TopLeft="114.285716231988,88.7058835970077" />
+        <EdgeLayout
+          Id="Package\Productos.Paths[Salida de origen de Excel]"
+          TopLeft="190.285716231988,130.305883597008">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="263.000004342625,38.6941187731537"
+              Start="0,0"
+              End="263.000004342625,31.1941187731537">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.3470593865768" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.3470593865768"
+                    Point2="0,19.3470593865768"
+                    Point3="4,19.3470593865768" />
+                  <mssgle:LineSegment
+                    End="259.000004342625,19.3470593865768" />
+                  <mssgle:CubicBezierSegment
+                    Point1="259.000004342625,19.3470593865768"
+                    Point2="263.000004342625,19.3470593865768"
+                    Point3="263.000004342625,23.3470593865768" />
+                  <mssgle:LineSegment
+                    End="263.000004342625,31.1941187731537" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Productos\Origen de Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Bodegas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Bodegas\Origen de Excel"
+          TopLeft="57,46" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
